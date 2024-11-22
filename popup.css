@@ -1,0 +1,1388 @@
+/* Dark Mode Styles */
+:root {
+    --bg-color: #f0f2f5;
+    --container-bg: #ffffff;
+    --text-color: #202124;
+    --border-color: #e8eaed;
+    --primary-color: #1a73e8;
+    --secondary-bg: #f8f9fa;
+    --hover-bg: #f1f3f4;
+    --nav-bg: #ffffff;
+    --nav-color: #5f6368;
+    --nav-hover: #e8eaed;
+    --input-bg: #ffffff;
+    --modal-bg: #ffffff;
+    --shadow-color: rgba(0,0,0,0.1);
+}
+
+body.dark-mode {
+    --bg-color: #1a1a1a;
+    --container-bg: #2d2d2d;
+    --text-color: #e8eaed;
+    --border-color: #404040;
+    --primary-color: #8ab4f8;
+    --secondary-bg: #3c3c3c;
+    --hover-bg: #404040;
+    --nav-bg: #2d2d2d;
+    --nav-color: #e8eaed;
+    --nav-hover: #404040;
+    --input-bg: #3c3c3c;
+    --modal-bg: #2d2d2d;
+    --shadow-color: rgba(0,0,0,0.3);
+}
+
+body {
+    width: 600px;
+    height: 400px;
+    margin: 0;
+    padding: 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 16px;
+    height: 100%;
+    background-color: var(--container-bg);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.header {
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 4px;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    background-color: var(--secondary-bg);
+    border-radius: 8px;
+    margin-right: -4px;
+}
+
+.logo-section h1 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.logo-section h1 i {
+    font-size: 18px;
+    color: var(--primary-color);
+}
+
+.header-actions {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    margin-right: auto;
+    padding: 4px;
+}
+
+.action-btn {
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    color: var(--nav-color);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.action-btn::after {
+    content: attr(title);
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--secondary-bg);
+    color: var(--primary-color);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s;
+    border: 1px solid var(--border-color);
+}
+
+.action-btn:hover::after {
+    opacity: 1;
+    visibility: visible;
+    top: -30px;
+}
+
+.action-btn i {
+    font-size: 14px;
+}
+
+.search-box {
+    position: relative;
+    width: 100%;
+    max-width: 150px;
+    margin: 0 auto;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 8px 32px 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 13px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    transition: all 0.2s;
+}
+
+.search-box input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(138, 180, 248, 0.1);
+    outline: none;
+}
+
+.search-box i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--nav-color);
+    font-size: 14px;
+}
+
+.note-input {
+    margin-bottom: 20px;
+}
+
+#noteInput, #editNoteText {
+    width: calc(100% - 24px);
+    height: 120px;
+    padding: 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    resize: vertical;
+    min-height: 80px;
+    max-height: 200px;
+}
+
+.note-controls {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+select {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 2px solid #e8eaed;
+    flex: 1;
+    font-size: 14px;
+    color: #5f6368;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+select:focus {
+    outline: none;
+    border-color: #1a73e8;
+}
+
+.filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+.filter-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+    background-color: #f8f9fa;
+    border: 2px solid #e8eaed;
+    border-radius: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s;
+}
+
+.filter-btn:hover {
+    background-color: #f1f3f4;
+}
+
+.filter-btn.active {
+    background-color: #1a73e8;
+    color: white;
+    border-color: #1a73e8;
+}
+
+.note-item {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.note-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.note-category {
+    font-size: 11px;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.note-text {
+    line-height: 1.5;
+    font-size: 14px;
+    white-space: pre-line;
+    padding: 0;
+    max-height: 60px;
+    overflow: hidden;
+    position: relative;
+    color: var(--text-color);
+    margin: 0;
+    transition: max-height 0.3s ease;
+}
+
+.note-text.expanded {
+    max-height: 1000px;
+}
+
+.note-text.expanded::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+.note-text:not(.expanded)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    background: linear-gradient(
+        transparent 0%,
+        var(--secondary-bg) 90%
+    );
+    pointer-events: none;
+}
+
+.note-date {
+    font-family: 'Traditional Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 11px;
+    color: var(--nav-color);
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid var(--border-color);
+}
+
+.note-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    flex: 1;
+}
+
+.primary-btn {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+}
+
+.primary-btn:hover {
+    background-color: #1557b0;
+}
+
+.secondary-btn {
+    background-color: #f8f9fa;
+    color: #1a73e8;
+    border: 1px solid #1a73e8;
+}
+
+.secondary-btn:hover {
+    background-color: #e8f0fe;
+}
+
+.edit-btn {
+    background-color: #34a853;
+    color: white;
+    border: none;
+}
+
+.edit-btn:hover {
+    background-color: #2d8745;
+}
+
+.danger-btn {
+    background-color: #ea4335;
+    color: white;
+    border: none;
+}
+
+.danger-btn:hover {
+    background-color: #d33828;
+}
+
+.toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.toast.success {
+    background-color: #34a853;
+}
+
+.toast.error {
+    background-color: #ea4335;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background-color: var(--modal-bg);
+    color: var(--text-color);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.modal-header {
+    margin-bottom: 16px;
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 18px;
+    color: var(--primary-color);
+}
+
+.modal-body {
+    margin-bottom: 20px;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+/* Theme Switch Button */
+.theme-switch {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.theme-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+.theme-btn:hover {
+    background-color: var(--hover-bg);
+}
+
+/* Navigation Bar */
+.nav-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--nav-bg);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0 -4px 12px var(--shadow-color);
+    z-index: 1000;
+}
+
+.nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    color: var(--nav-color);
+    padding: 10px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.nav-btn i {
+    font-size: 20px;
+}
+
+.nav-btn span {
+    font-size: 12px;
+}
+
+.nav-btn:hover {
+    background-color: var(--nav-hover);
+    color: var(--primary-color);
+}
+
+.nav-btn.danger-btn {
+    color: #ff4444;
+}
+
+.nav-btn.danger-btn:hover {
+    background-color: rgba(255, 68, 68, 0.1);
+}
+
+/* Dark Mode Specific Improvements */
+body.dark-mode .note-item {
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+}
+
+body.dark-mode .modal-content {
+    background-color: var(--modal-bg);
+    border: 1px solid var(--border-color);
+}
+
+body.dark-mode .note-category {
+    color: #8ab4f8;
+}
+
+body.dark-mode .note-date {
+    color: #9aa0a6;
+}
+
+body.dark-mode select {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: 2px solid var(--border-color);
+}
+
+body.dark-mode .filter-btn {
+    background-color: var(--secondary-bg);
+    color: var(--text-color);
+}
+
+body.dark-mode .filter-btn.active {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+/* Additional Improvements */
+.filter-btn {
+    padding: 8px 16px;
+    border-radius: 12px;
+    transition: all 0.3s;
+    border: 1px solid var(--border-color);
+}
+
+.note-item {
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s;
+}
+
+.note-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.modal-content {
+    background-color: var(--modal-bg);
+    color: var(--text-color);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+/* Toast Improvements */
+.toast {
+    background-color: var(--container-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.toast.success {
+    border-left: 4px solid #34a853;
+}
+
+.toast.error {
+    border-left: 4px solid #ea4335;
+}
+
+/* تحسين شريط التمرير */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--container-bg);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--nav-color);
+    border-radius: 8px;
+    border: 2px solid var(--container-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+/* تحسين شريط التمرير في الوضع الليلي */
+body.dark-mode::-webkit-scrollbar-track {
+    background: var(--secondary-bg);
+}
+
+body.dark-mode::-webkit-scrollbar-thumb {
+    background: #4a4a4a;
+    border: 2px solid var(--secondary-bg);
+}
+
+body.dark-mode::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+/* تحسين شريط التمرير في textarea */
+textarea::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+textarea::-webkit-scrollbar-track {
+    background: var(--input-bg);
+    border-radius: 4px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background: var(--nav-color);
+    border-radius: 4px;
+    border: 2px solid var(--input-bg);
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+/* تحسين شريط التمرير في textarea في الوضع الليلي */
+body.dark-mode textarea::-webkit-scrollbar-track {
+    background: var(--input-bg);
+}
+
+body.dark-mode textarea::-webkit-scrollbar-thumb {
+    background: #4a4a4a;
+    border: 2px solid var(--input-bg);
+}
+
+body.dark-mode textarea::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+/* تحسين موقع أزرار التصدير والحذف */
+.global-actions {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    gap: 8px;
+}
+
+.global-actions button {
+    padding: 8px;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* أنماط زر الإعدادات */
+.settings-btn {
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-btn:hover {
+    background-color: var(--hover-bg);
+    transform: translateY(-1px);
+}
+
+/* مودال الإعدادات */
+.settings-modal .modal-content {
+    width: 300px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.settings-section {
+    margin-bottom: 20px;
+}
+
+.settings-section h4 {
+    margin: 0 0 10px 0;
+    color: var(--text-color);
+}
+
+.category-list {
+    margin-bottom: 15px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.category-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+}
+
+.category-item button {
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: none;
+    background-color: var(--hover-bg);
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.add-category-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: var(--secondary-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.add-category-form input {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+.add-category-form button {
+    padding: 8px 12px;
+    border-radius: 6px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.add-category-form button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* تحسين زر النسخ في الوضع الليلي */
+body.dark-mode .secondary-btn {
+    background-color: #3c3c3c;
+    color: #e8eaed;
+    border: 1px solid #404040;
+}
+
+body.dark-mode .secondary-btn:hover {
+    background-color: #4a4a4a;
+}
+
+/* تحسين مظهر النصوص في الوضع الليلي */
+body.dark-mode .note-text {
+    color: #e8eaed;
+}
+
+body.dark-mode .note-date {
+    color: #9aa0a6;
+}
+
+/* تحسين أزرار التصنيف */
+.category-actions {
+    display: flex;
+    gap: 4px;
+}
+
+.edit-category-btn,
+.delete-category {
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: none;
+    background-color: var(--hover-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.edit-category-btn:hover,
+.delete-category:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* تحسين مظهر النوتس في الوضع الليلي */
+body.dark-mode .note-item {
+    background-color: var(--secondary-bg);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .note-category {
+    color: var(--primary-color);
+}
+
+/* تحسين مظهر التاريخ */
+.note-date {
+    font-family: 'Traditional Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13px;
+}
+
+/* تحسين مظهر النص */
+.note-text {
+    line-height: 1.5;
+    font-size: 14px;
+    white-space: pre-line;
+    padding: 0;
+    max-height: 60px;
+    overflow: hidden;
+    position: relative;
+    color: var(--text-color);
+    margin: 0;
+}
+
+/* تحسين زر النسخ */
+.copy-btn {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    border: 1px solid #bbdefb;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.copy-btn:hover {
+    background-color: #bbdefb;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.15);
+}
+
+/* تحسين زر النسخ في الوضع الليلي */
+body.dark-mode .copy-btn {
+    background-color: #1e3a5f;
+    color: #90caf9;
+    border: 1px solid #1e88e5;
+}
+
+body.dark-mode .copy-btn:hover {
+    background-color: #234671;
+    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.15);
+}
+
+/* تحسين أيقونة النسخ */
+.copy-btn i {
+    margin-left: 4px;
+    color: inherit;
+}
+
+/* تحسين مظهر زر عرض المزيد */
+.expand-btn {
+    display: none;
+}
+
+.note-text.has-more .expand-btn {
+    display: block;
+    opacity: 0;
+}
+
+.note-item:hover .expand-btn {
+    opacity: 1;
+}
+
+body.dark-mode .expand-btn {
+    background-color: var(--hover-bg);
+}
+
+.expand-btn:hover {
+    background-color: var(--hover-bg);
+}
+
+body.dark-mode .expand-btn:hover {
+    background-color: var(--secondary-bg);
+}
+
+/* تحسين المسافات بين الفقرات */
+.note-text br {
+    display: block;
+    content: "";
+    margin-top: 8px;
+}
+
+.note-text br + br {
+    margin-top: 0;
+}
+
+/* تحسين المسافة في نهاية القائمة */
+.notes-list {
+    margin-bottom: 12px;
+}
+
+/* تنسيق القسم الأيمن */
+.input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* تنسيق قائمة النوتس */
+.notes-section {
+    border-right: 1px solid var(--border-color);
+    padding-right: 16px;
+    padding-left: 20px;
+    margin-right: 0;
+    position: relative;
+    overflow-y: auto;
+    max-height: calc(100vh - 40px);
+}
+
+/* تحسين مظهر النوت */
+.note-item {
+    position: relative;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    margin-left: 4px;
+}
+
+/* إضافة زر التثبيت */
+.pin-btn {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: transparent;
+    border: none;
+    color: var(--nav-color);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.pin-btn:hover {
+    background-color: var(--hover-bg);
+}
+
+.pin-btn.pinned {
+    color: var(--primary-color);
+}
+
+/* تنسيق النوتس المثبتة */
+.note-item.pinned {
+    background-color: rgba(255, 223, 0, 0.05);
+    border: 1px solid #ffd700;
+}
+
+/* تحسين مظهر زر التثبيت للنوتس المثبتة */
+.pin-btn.pinned {
+    color: #ffd700;
+}
+
+/* تحسين مظهر النوتس المثبتة في الوضع المظلم */
+body.dark-mode .note-item.pinned {
+    background-color: rgba(255, 223, 0, 0.08);
+    border: 1px solid #ffd700;
+}
+
+/* تحسين التدرج عند نهاية النص */
+.note-text:not(.expanded)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    background: linear-gradient(
+        transparent 0%,
+        var(--secondary-bg) 90%
+    );
+    pointer-events: none;
+}
+
+/* تحسين التدرج للنوتس المبتة */
+.note-item.pinned .note-text:not(.expanded)::after {
+    background: linear-gradient(
+        transparent 0%,
+        rgba(255, 223, 0, 0.05) 90%
+    );
+}
+
+body.dark-mode .note-item.pinned .note-text:not(.expanded)::after {
+    background: linear-gradient(
+        transparent 0%,
+        rgba(255, 223, 0, 0.08) 90%
+    );
+}
+
+/* تحسين حقل البحث */
+.search-box {
+    position: relative;
+    width: 100%;
+    max-width: 150px;
+    margin: 0 auto;
+}
+
+/* تحسين تنسيق أزرار التحكم في النوت */
+.note-controls {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+#noteCategory {
+    flex: 0 0 auto;
+    min-width: 120px;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#noteCategory:hover {
+    border-color: var(--primary-color);
+}
+
+#saveNote {
+    flex: 0 0 auto;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    gap: 8px;
+}
+
+/* تحسين شريط التمرير للنوتس */
+.notes-section::-webkit-scrollbar {
+    width: 6px;
+    position: absolute;
+    left: 4px;
+}
+
+.notes-section::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 4px 0;
+}
+
+.notes-section::-webkit-scrollbar-thumb {
+    background: var(--nav-color);
+    border-radius: 10px;
+    border: none;
+}
+
+.notes-section::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+/* تحسين المسافة بين النوتس والشريط */
+.notes-section {
+    padding-right: 16px;
+    padding-left: 20px;
+    margin-right: 0;
+}
+
+/* تحسين مظهر النوتس */
+.note-item {
+    margin-bottom: 12px;
+    border-radius: 10px;
+    margin-left: 4px;
+}
+
+/* تنسيق الملاحظات المحذوفة */
+.deleted-note {
+    opacity: 0.9;
+    position: relative;
+    border: 1px solid var(--border-color);
+    padding: 16px;
+}
+
+.deleted-note-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 12px;
+    color: var(--nav-color);
+}
+
+.deleted-date, .days-left {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.days-left.warning {
+    color: #ff6b6b;
+}
+
+.deleted-note .note-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.restore-btn, .permanent-delete-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+
+.restore-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.permanent-delete-btn {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.restore-btn:hover, .permanent-delete-btn:hover {
+    transform: translateY(-1px);
+    opacity: 0.9;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--nav-color);
+}
+
+.empty-state i {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.empty-state p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* تحديث تنسيقات مودال سلة المحذوفات */
+#trashModal .modal-content {
+    width: 300px;
+    max-height: 400px;
+}
+
+#trashModal .modal-body {
+    max-height: 250px;
+    overflow-y: auto;
+    padding: 12px;
+    margin: 0;
+}
+
+/* تحسين تنسيق الملاحظات المحذوفة للشاشة الأصغر */
+#deletedNotesList .deleted-note {
+    padding: 12px;
+    font-size: 13px;
+}
+
+.deleted-note-header {
+    font-size: 11px;
+    margin-bottom: 8px;
+}
+
+.deleted-note .note-actions {
+    gap: 6px;
+}
+
+.restore-btn, .permanent-delete-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+/* تحديث تنسيقات مودال About */
+.about-modal {
+    width: 280px !important;
+}
+
+.about-content {
+    text-align: center;
+    padding: 12px 0;
+}
+
+.developer-info {
+    margin-bottom: 16px;
+}
+
+.app-logo {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+}
+
+.developer-info h4 {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 18px;
+}
+
+.version {
+    color: var(--nav-color);
+    font-size: 12px;
+    margin: 4px 0;
+}
+
+.developer {
+    color: var(--text-color);
+    font-size: 14px;
+    margin: 8px 0;
+}
+
+.social-links {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin: 12px auto;
+    max-width: 180px;
+}
+
+.social-links a {
+    color: var(--nav-color);
+    font-size: 16px;
+    transition: all 0.2s;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background-color: var(--secondary-bg);
+}
+
+.social-links a:hover {
+    transform: translateY(-2px);
+    color: var(--primary-color);
+    background-color: var(--hover-bg);
+}
+
+/* تخصيص ألوان مواقع التواصل */
+.social-links a:hover .fa-facebook { color: #1877f2; }
+.social-links a:hover .fa-whatsapp { color: #25d366; }
+.social-links a:hover .fa-instagram { color: #e4405f; }
+.social-links a:hover .fa-github { color: #333; }
+.social-links a:hover .fa-x-twitter { color: #1da1f2; }
+.social-links a:hover .fa-telegram { color: #0088cc; }
+.social-links a:hover .fa-tiktok { color: #000000; }
+.social-links a:hover .fa-linkedin { color: #0077b5; }
+
+.copyright {
+    margin-top: 12px;
+    color: var(--nav-color);
+    font-size: 12px;
+}
+
+/* تحديث تنسيقات قسم الإعدادات */
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.settings-header h4 {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 16px;
+}
+
+.settings-header .action-btn {
+    width: 32px;
+    height: 32px;
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    color: var(--nav-color);
+    border-radius: 8px;
+}
+
+.settings-header .action-btn:hover {
+    background-color: var(--hover-bg);
+    color: var(--primary-color);
+    transform: translateY(-1px);
+}
+
+/* تنسيق قسم الاختصارات */
+.shortcuts-list {
+    background-color: var(--secondary-bg);
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 8px;
+}
+
+.shortcut-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.shortcut-item:last-child {
+    border-bottom: none;
+}
+
+.shortcut-desc {
+    color: var(--text-color);
+    font-size: 13px;
+}
+
+kbd {
+    background-color: var(--container-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 12px;
+    color: var(--primary-color);
+    font-family: monospace;
+    box-shadow: 0 1px 1px var(--shadow-color);
+}
+
+/* تحسين مظهر الاختصارات في الوضع المظلم */
+body.dark-mode .shortcuts-list {
+    border: 1px solid var(--border-color);
+}
+
+body.dark-mode kbd {
+    background-color: var(--secondary-bg);
+    border-color: var(--border-color);
+}
+
+/* إضافة تنسيق للبريد الإلكتروني */
+.email {
+    color: var(--primary-color);
+    font-size: 13px;
+    margin: 8px 0;
+    direction: ltr;
+}
+ 

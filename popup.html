@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="dark-mode">
+    <div class="container">
+        <!-- القسم الأيمن - الإدخال والبحث -->
+        <div class="input-section">
+            <div class="header">
+                <div class="header-top">
+                    <div class="logo-section">
+                        <h1><i class="fas fa-bookmark"></i> PopNote</h1>
+                    </div>
+                    <div class="header-actions">
+                        <button id="themeToggle" class="action-btn" title="تغيير المظهر">
+                            <i class="fas fa-sun"></i>
+                        </button>
+                        <button id="settingsBtn" class="action-btn" title="الإعدادات">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                        <button id="exportNotes" class="action-btn" title="تصدير">
+                            <i class="fas fa-file-export"></i>
+                        </button>
+                        <button id="clearAll" class="action-btn" title="حذف الكل">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        <button id="aboutBtn" class="action-btn" title="حول التطبيق">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="بحث في الملاحظات...">
+                </div>
+            </div>
+            <div class="note-input">
+                <textarea id="noteInput" placeholder="اكتب ملاحظتك هنا..."></textarea>
+                <div class="note-controls">
+                    <select id="noteCategory">
+                        <option value="general">📝 عام</option>
+                        <option value="work">💼 عمل</option>
+                        <option value="personal">👤 شخصي</option>
+                        <option value="ideas">💡 أفكار</option>
+                    </select>
+                    <button id="saveNote" class="btn primary-btn">
+                        <i class="fas fa-save"></i> حفظ
+                    </button>
+                </div>
+            </div>
+            <div class="filters">
+                <button id="allNotes" class="filter-btn active">
+                    <i class="fas fa-layer-group"></i> الكل
+                </button>
+                <button id="generalNotes" class="filter-btn">
+                    <i class="fas fa-inbox"></i> عام
+                </button>
+                <button id="workNotes" class="filter-btn">
+                    <i class="fas fa-briefcase"></i> عمل
+                </button>
+                <button id="personalNotes" class="filter-btn">
+                    <i class="fas fa-user"></i> شخصي
+                </button>
+                <button id="ideasNotes" class="filter-btn">
+                    <i class="fas fa-lightbulb"></i> أفكار
+                </button>
+            </div>
+        </div>
+
+        <!-- القسم الأيسر - النوتس -->
+        <div class="notes-section">
+            <div id="notesList" class="notes-list">
+                <!-- الملاحظات ستظهر هنا -->
+            </div>
+        </div>
+    </div>
+
+    <!-- مودال الإعدادات -->
+    <div id="settingsModal" class="modal settings-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">الإعدادات</h3>
+            </div>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <div class="settings-header">
+                        <h4>التصنيفات</h4>
+                        <button id="trashBtn" class="action-btn" title="سلة المحذوفات">
+                            <i class="fas fa-trash-restore"></i>
+                        </button>
+                    </div>
+                    <div id="categoryList" class="category-list">
+                        <!-- سيتم إضافة التصنيفات هنا ديناميكياً -->
+                    </div>
+                    <div class="add-category-form">
+                        <input type="text" id="newCategoryInput" placeholder="اسم التصنيف الجديد">
+                        <button id="addCategory" class="btn primary-btn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="settings-section">
+                        <h4>اختصارات لوحة المفاتيح</h4>
+                        <div class="shortcuts-list">
+                            <div class="shortcut-item">
+                                <span class="shortcut-desc">فتح PopNote</span>
+                                <kbd>Alt + R</kbd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="closeSettings" class="btn secondary-btn">
+                    <i class="fas fa-times"></i> إغلاق
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- مودال تعديل الملاحظة -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">تعديل الملاحظة</h3>
+            </div>
+            <div class="modal-body">
+                <textarea id="editNoteText" placeholder="تعديل الملاحظة..."></textarea>
+                <select id="editNoteCategory">
+                    <option value="general">📝 عام</option>
+                    <option value="work">💼 عمل</option>
+                    <option value="personal">👤 شخصي</option>
+                    <option value="ideas">💡 أفكار</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelEdit" class="btn secondary-btn">
+                    <i class="fas fa-times"></i> إلغاء
+                </button>
+                <button id="saveEdit" class="btn primary-btn">
+                    <i class="fas fa-check"></i> حفظ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- مودال سلة المحذوفات -->
+    <div id="trashModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">سلة المحذوفات</h3>
+            </div>
+            <div class="modal-body">
+                <div id="deletedNotesList" class="notes-list">
+                    <!-- الملاحظات المحذوفة ستظهر هنا -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="closeTrash" class="btn secondary-btn">
+                    <i class="fas fa-times"></i> إغلاق
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- مودال About -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content about-modal">
+            <div class="modal-header">
+                <h3 class="modal-title">حول التطبيق</h3>
+            </div>
+            <div class="modal-body">
+                <div class="about-content">
+                    <div class="developer-info">
+                        <img src="icon.png" alt="PopNote" class="app-logo">
+                        <h4>PopNote</h4>
+                        <p class="version">الإصدار 1.0</p>
+                        <p class="developer">تطوير: Omar Tnzxo</p>
+                        <p class="email">omar-agha@engineer.com</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://facebook.com/Omar.Tnzxo" target="_blank" title="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://wa.me/+201029752972" target="_blank" title="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://instagram.com/Omar.Tnzxo" target="_blank" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://github.com/Omar-Tnzxo" target="_blank" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://x.com/OmarTnzxo" target="_blank" title="X (Twitter)">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://t.me/Omar_Tnzxo" target="_blank" title="Telegram">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="https://tiktok.com/@omar.tnzxo" target="_blank" title="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/Omar-Tnzxo" target="_blank" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                    <div class="copyright">
+                        <p>جميع الحقوق محفوظة © 2024</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="closeAbout" class="btn secondary-btn">
+                    <i class="fas fa-times"></i> إغلاق
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="popup.js"></script>
+</body>
+</html> 
