@@ -22,6 +22,11 @@ chrome.runtime.onInstalled.addListener(() => {
       });
     }
   });
+
+  // جدولة النسخ الاحتياطي التلقائي
+  chrome.alarms.create('autoBackup', {
+    periodInMinutes: 60 // نسخ احتياطي كل ساعة
+  });
 });
 
 // مراقبة حالة الاتصال
@@ -29,7 +34,7 @@ chrome.runtime.onStartup.addListener(() => {
   syncData();
 });
 
-// مزامنة البيانات عند توفر الاتصال
+// مزامنة لبيانات عند توفر الاتصال
 function syncData() {
   if (navigator.onLine) {
     chrome.storage.local.get(['pendingChanges'], (result) => {
@@ -87,4 +92,37 @@ chrome.commands.onCommand.addListener((command) => {
 // تحسين الأداء عند فتح النافذة
 chrome.action.onClicked.addListener(() => {
   chrome.action.openPopup();
-}); 
+});
+
+// معالج النسخ الاحتياطي
+chrome.alarms.onAlarm.addListener((alarm) => {
+  if (alarm.name === 'autoBackup') {
+    createBackup();
+  }
+});
+
+async function createBackup() {
+  try {
+    const data = await chrome.storage.sync.get(null);
+    const backup = {
+      timestamp: Date.now(),
+      data: data
+    };
+    
+    // حفظ النسخة الاحتياطية
+    await chrome.storage.local.set({
+      [`backup_${backup.timestamp}`]: backup
+    });
+
+    // حذف النسخ القديمة (الاحتفاظ بآخر 5 نسخ)
+    const backups = await getBackups();
+    if (backups.length > 5) {
+      const oldBackups = backups.slice(5);
+      for (const backup of oldBackups) {
+        await chrome.storage.local.remove(`backup_${backup.timestamp}`);
+      }
+    }
+  } catch (error) {
+    console.error('خطأ في النسخ الاحتياطي:', error);
+  }
+} 

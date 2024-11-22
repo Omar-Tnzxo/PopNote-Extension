@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (noteText) {
             saveNote(noteText, categorySelect.value);
             noteInput.value = '';
-            showToast('تم حفظ الملاحظة بنجاح', 'success');
+            showToast('تم حفظ الملاحظة بناح', 'success');
         }
     });
 
@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const noteIndex = notes.findIndex(note => note.id === noteId);
             
             if (noteIndex !== -1) {
-                // إضافة تاريخ الحذف للملاحظة
+                // إضافة تاريخ الحذف للملحظة
                 const deletedNote = {
                     ...notes[noteIndex],
                     deletedAt: Date.now()
@@ -322,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const noteIndex = deletedNotes.findIndex(note => note.id === noteId);
             
             if (noteIndex !== -1) {
-                // استعادة الملاحظة بدون ت��ريخ الحذف
+                // استعادة الملاحظة بدون تريخ الحذف
                 const { deletedAt, ...restoredNote } = deletedNotes[noteIndex];
                 
                 // إضافة الملاحظة إلى القائمة الرئيسية
@@ -373,13 +373,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function showToast(message, type = 'success') {
+    function showToast(message, type = 'info', duration = 3000) {
         const toast = document.getElementById('toast');
-        toast.innerHTML = message;
-        toast.className = `toast ${type} show`;
+        const icons = {
+            success: '✅',
+            error: '❌',
+            info: 'ℹ️',
+            warning: '⚠️'
+        };
+
+        toast.innerHTML = `
+            <span class="toast-icon">${icons[type]}</span>
+            <span class="toast-message">${message}</span>
+            <button class="toast-close">×</button>
+        `;
+        
+        toast.className = `toast show toast-${type}`;
+        
+        // إضافة زر إغلاق للتنبيه
+        const closeBtn = toast.querySelector('.toast-close');
+        closeBtn.onclick = () => toast.classList.remove('show');
+
         setTimeout(() => {
-            toast.className = 'toast';
-        }, 3000);
+            toast.classList.remove('show');
+        }, duration);
     }
 
     function getCategoryIcon(category) {
@@ -517,7 +534,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `).join('');
 
-        // إ��افة مستمعي الأحداث لأزرار التعديل
+        // إافة مستمعي الأحداث لأزرار التعديل
         document.querySelectorAll('.edit-category-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const categoryId = e.target.closest('.edit-category-btn').dataset.id;
@@ -769,7 +786,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // تحديث دالة تحميل التصنيفات وإضافة تصنيف جديد
+    // تحدي�� دالة تحميل التصنيفات وإضافة تصنيف جديد
     function loadCategories() {
         chrome.storage.sync.get(['categories'], (result) => {
             const categories = result.categories || defaultCategories;
@@ -833,7 +850,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // إضافة معالجة الاختصارات داخل النافذة المنبثقة
+    // إضافة معالجة الاخت��ارات داخل النافذة المنبثقة
     document.addEventListener('keydown', (e) => {
         // حفظ الملاحظة: Ctrl/Command + Enter
         if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
@@ -864,5 +881,38 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navigator.brave) {
         // إضافة تهيئة خاصة لمتصفح Brave إذا لزم الأمر
         console.log('Running on Brave browser');
+    }
+
+    // إضافة معالج حدث لزر التحديث
+    document.getElementById('updateBtn').addEventListener('click', () => {
+        chrome.tabs.create({ url: 'https://github.com/Omar-Tnzxo/PopNote-Extension' });
+    });
+
+    // إضافة دعم الروابط والتنبيهات المحسنة
+    function formatNoteText(text) {
+        // تحويل الروابط إلى عناصر قابلة للنقر
+        return text.replace(
+            /(https?:\/\/[^\s]+)/g,
+            '<a href="$1" target="_blank" class="note-link">$1</a>'
+        );
+    }
+
+    // إضافة دليل المستخدم التفاعلي
+    function showTutorial() {
+        chrome.storage.local.get('tutorialShown', (result) => {
+            if (!result.tutorialShown) {
+                const steps = [
+                    {
+                        element: '#noteInput',
+                        title: 'إضافة ملاحظة',
+                        content: 'اكتب ملاحظتك هنا'
+                    },
+                    // ... المزيد من الخطوات
+                ];
+
+                startTutorial(steps);
+                chrome.storage.local.set({ tutorialShown: true });
+            }
+        });
     }
 }); 
